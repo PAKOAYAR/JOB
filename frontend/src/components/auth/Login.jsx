@@ -9,7 +9,7 @@ import axios from "axios";
 import { toast } from "sonner";
 import { USER_API_END_POINT } from "@/utils/constant";
 import { useDispatch, useSelector } from "react-redux";
-import { setLoading } from "@/redux/authSlice";
+import { setLoading, SetUser } from "@/redux/authSlice";
 //import store from "@/redux/store";
 import { Loader2 } from "lucide-react";
 
@@ -41,6 +41,7 @@ const Login = () => {
         },withCredentials:true
       })
       if(res.data.success){
+        dispath(SetUser(res.data.user))
         navigate("/");
         toast.success(res.data.message)
       }
@@ -109,7 +110,8 @@ const Login = () => {
 loading? <Button className="w-full my-4"><Loader2 className="mr-2 h-4 w-4 animate-spin"/>Please Wait</Button>:<Button type="submit" className="w-full my-4">Login</Button>
           }
            
-           <span>Don`t have an account? <Link to="/signup" className="text-blue-600">signup</Link></span>
+           <span>Don`t have an account? <Link to="/signup" className="text-blue-600">signup</Link></span><br/>
+           <span>forgot password? <Link to="/signup" className="text-blue-600">Reset Password</Link></span>
         </form>
       </div>
     </div>

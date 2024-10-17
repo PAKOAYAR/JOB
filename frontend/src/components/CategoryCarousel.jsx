@@ -1,5 +1,5 @@
 import React from 'react'
-import { Carousel, CarouselContent, CarouselItem } from './ui/carousel'
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from './ui/carousel'
 import { Button } from './ui/button'
 const category=[
     "Frontend Developer",
@@ -12,17 +12,19 @@ const category=[
 const CategoryCarousel=()=>{
   return (
     <div>
-      <Carousel>
-        <CarouselContent className='w-full max-w-xl mx-auto my-20'>
+      <Carousel  className='w-full max-w-xl mx-auto my-20'>
+        <CarouselContent>
             {
             category.map((cat, index) => (
                 <CarouselItem className='md:basis-1/2 lg-basis-1/3'>
-<Button>{cat}</Button>
+<Button variant='outline'>{cat}</Button>
                 </CarouselItem>
             ))
             }
            
         </CarouselContent>
+        <CarouselPrevious></CarouselPrevious>
+        <CarouselNext></CarouselNext>
       </Carousel>
     </div>
   )
