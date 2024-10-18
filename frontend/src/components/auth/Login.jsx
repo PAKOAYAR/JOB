@@ -46,8 +46,11 @@ const Login = () => {
         toast.success(res.data.message)
       }
     } catch (error) {
-      console.log(error);
-     
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response.data.error);
+      } else {
+        toast.error(res.error.message);
+      }
     }finally{
       dispath(setLoading(false));
     }

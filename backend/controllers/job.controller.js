@@ -8,7 +8,7 @@ export const postJob = async (req, res) => {
 
         if (!title || !description || !requirements || !salary || !location || !jobType || !experience || !position || !companyId) {
             return res.status(400).json({
-                message: "Somethin is missing.",
+                error: "Somethin is missing.",
                 success: false
             })
         };
@@ -48,7 +48,7 @@ export const getAllJobs = async (req, res) => {
         }).sort({ createdAt: -1 });
         if (!jobs) {
             return res.status(404).json({
-                message: "Jobs not found.",
+                error: "Jobs not found.",
                 success: false
             })
         };
@@ -67,7 +67,7 @@ export const getJobById = async (req, res) => {
         const job = await Job.findById(jobId)
         if (!job) {
             return res.status(404).json({
-                message: "Jobs not found.",
+                error: "Jobs not found.",
                 success: false
             })
         };
@@ -85,7 +85,7 @@ export const getAdminJobs = async (req, res) => {
         });
         if (!jobs) {
             return res.status(404).json({
-                message: "Jobs not found.",
+                error: "Jobs not found.",
                 success: false
             })
         };
