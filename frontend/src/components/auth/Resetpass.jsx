@@ -1,8 +1,11 @@
 import React from 'react'
+import Navbar from '../ui/shared/Navbar'
 
 const Resetpass = () => {
   return (
-    <div>Resetpass</div>
+    <div>
+        <Navbar/>
+    </div>
   )
 }
 
