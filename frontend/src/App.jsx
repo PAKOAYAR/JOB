@@ -6,6 +6,8 @@ import Login from './components/auth/Login'
 import Signup from './components/auth/Signup'
 import Jobs from './components/jobs'
 import Browse from './components/Browse'
+import Profile from './components/Profile'
+import Resetpass from './components/auth/Resetpass'
 //import Navbar from './components/ui/shared/Navbar'
 const appRouter=createBrowserRouter([
   {
@@ -16,9 +18,14 @@ const appRouter=createBrowserRouter([
     path:'/login',
     element:<Login/>
   },
+  
   {
     path:'/signup',
     element:<Signup/>
+  },
+  {
+    path:'/resetpass',
+    element:<Resetpass/>
   },
   {
     path:'/jobs',
@@ -27,6 +34,10 @@ const appRouter=createBrowserRouter([
   {
     path:'/browse',
     element:<Browse/>
+  },
+  {
+    path:'/profile',
+    element:<Profile/>
   }
 ])
 function App() {

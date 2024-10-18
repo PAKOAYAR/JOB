@@ -40,27 +40,27 @@ export const login = async (req, res) => {
     const { email, password, role } = req.body;
     if (!email || !password || !role) {
       return res.status(400).json({
-        message: "something missing",
+        error: "something missing",
         success: false,
       });
     }
     let user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({
-        message: "Incorrect email or password",
+        error: "Incorrect email or password",
         success: false,
       });
     }
     const isPasswordmatch = await bcrypt.compare(password, user.password);
     if (!isPasswordmatch) {
       return res.status(400).json({
-        message: "Incorrect email or password",
+        error: "Incorrect email or password",
         success: false,
       });
     }
     if (role != user.role) {
       return res.status(400).json({
-        message: "Account doesnt exist with current role",
+        error: "Account doesnt exist with current role",
         success: false,
       });
     }
@@ -118,7 +118,7 @@ export const updateProfile = async (req, res) => {
     let user = await User.findById(userId);
     if (!user) {
       return res.status(400).json({
-        message: "user not found",
+        error: "user not found",
         success: false
       });
     }

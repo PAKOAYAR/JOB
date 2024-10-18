@@ -5,14 +5,14 @@ export const registerCompany = async (req, res) => {
     const { companyName } = req.body;
     if (!companyName) {
       return res.status(400).json({
-        message: "company name require",
+        error: "company name require",
         success: false,
       });
     }
     let company = await Company.findOne({ name: companyName });
     if (!companyName) {
       return res.status(400).json({
-        message: "you can`t add same company",
+        error: "you can`t add same company",
         success: false,
       });
     }
@@ -35,7 +35,7 @@ export const getcompany = async (req, res) => {
     const companies = await Company.find({ userId });
     if (!companies) {
       return res.status(400).json({
-        message: "company not found",
+        error: "company not found",
         success: false,
       });
     }
@@ -55,7 +55,7 @@ export const getCompanyById = async (req, res) => {
     const company = await Company.findById(companyId);
     if (!company) {
       return res.status(400).json({
-        message: "company not found",
+        error: "company not found",
         success: false,
       });
     }
@@ -79,7 +79,7 @@ export const updateCompany = async (req, res) => {
 
         if (!company) {
             return res.status(404).json({
-                message: "Company not found.",
+              error: "Company not found.",
                 success: false
             })
         }
