@@ -1,4 +1,5 @@
 import { User } from "../models/user.model.js";
+import {audit} from '../models/audit.js'
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
@@ -53,7 +54,12 @@ export const login = async (req, res) => {
     let user = await User.findOne({ email });
     if(user)
     {
-      user.loginLogs.push({date,ip})
+      await audit.create({
+        userId:user._id,
+        email: user.email,
+        date: new Date(), 
+        ipAddress: ip
+      });
       await user.save();
     }
     if (!user) {
