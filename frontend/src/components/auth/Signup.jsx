@@ -106,6 +106,8 @@ const Signup = () => {
               name="phoneNumber"
               onChange={changeEventHandler}
               placeholder="9999999999"
+              maxLength={10}
+    pattern="[0-9]{10}"
             ></Input>
           </div>
           <div className="my-2">
@@ -115,7 +117,7 @@ const Signup = () => {
               value={input.password}
               name="password"
               onChange={changeEventHandler}
-              placeholder="pankaj@gmail.com"
+              placeholder="********"
             ></Input>
           </div>
           <div className="flex items-center justify-between">
