@@ -114,7 +114,7 @@ loading? <Button className="w-full my-4"><Loader2 className="mr-2 h-4 w-4 animat
           }
            
            <span>Don`t have an account? <Link to="/signup" className="text-blue-600">signup</Link></span><br/>
-           <span>forgot password? <Link to="/forgotpassword" className="text-blue-600">Reset Password</Link></span>
+           <span>forgot password? <Link to="/password" className="text-blue-600">Reset Password</Link></span>
         </form>
       </div>
     </div>

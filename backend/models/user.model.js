@@ -22,6 +22,7 @@ const userSchema = new mongoose.Schema(
       enum: ["student", "recruiter"],
       require: true,
     },
+ 
     loginLogs: {
       type: [
         {
