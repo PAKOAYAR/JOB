@@ -39,9 +39,14 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
   try {
     const { email, password, role } = req.body;
-    const date = Date.now();
+    const date = new Date();
     const ip = req.ip || req.connection.remoteAddress;
     console.log(date, ip);
+
+    const month = date.getMonth();
+    console.log(month,date.getHours() + " : " +  date.getMinutes() + " : " + date.getSeconds());
+    
+
 
     if (!email || !password || !role) {
       return res.status(400).json({
