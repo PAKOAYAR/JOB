@@ -167,6 +167,26 @@ export const updateProfile = async (req, res) => {
     console.log(error);
   }
 };
+export const myProfile = async (req, res) => {
+  try {
+    const userId = req.id;
+    let user = await User.findById(userId);
+    if (!user) {
+      return res.status(400).json({
+        error: "user not found",
+        success: false,
+      });
+    }
+    
+    
+    return res.status(200).json({
+      success:true,
+      user
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
 export const history = async (req, res) => {
   const user = req.id;
   console.log(user);
