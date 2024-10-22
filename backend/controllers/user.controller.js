@@ -1,13 +1,12 @@
 import { User } from "../models/user.model.js";
-import {audit} from '../models/audit.js'
+import { audit } from "../models/audit.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 export const register = async (req, res) => {
   try {
     const { fullname, email, phoneNumber, password, role } = req.body;
-  
-    
+
     if (!fullname || !email || !phoneNumber || !password || !role) {
       return res.status(400).json({
         message: "something missing",
@@ -41,9 +40,8 @@ export const login = async (req, res) => {
   try {
     const { email, password, role } = req.body;
     const date = Date.now();
-    const ip = req.ip || req.connection.remoteAddress ;
-    console.log(date,ip);
-    
+    const ip = req.ip || req.connection.remoteAddress;
+    console.log(date, ip);
 
     if (!email || !password || !role) {
       return res.status(400).json({
@@ -52,13 +50,12 @@ export const login = async (req, res) => {
       });
     }
     let user = await User.findOne({ email });
-    if(user)
-    {
+    if (user) {
       await audit.create({
-        userId:user._id,
+        userId: user._id,
         email: user.email,
-        date: new Date(), 
-        ipAddress: ip
+        date: new Date(),
+        ipAddress: ip,
       });
       await user.save();
     }
@@ -74,6 +71,14 @@ export const login = async (req, res) => {
         error: "Incorrect email or password",
         success: false,
       });
+    }
+    if (isPasswordmatch) {
+      // console.log(user._id);
+      if (typeof localStorage !== "undefined") {
+        localStorage.setItem("id", user._id);
+      } else {
+        console.error("localStorage is not available");
+      }
     }
     if (role != user.role) {
       return res.status(400).json({
@@ -95,7 +100,8 @@ export const login = async (req, res) => {
       role: user.role,
       profile: user.profile,
     };
-    return res.status(200)
+    return res
+      .status(200)
       .cookie("token", token, {
         maxAge: 1 * 24 * 60 * 60 * 1000,
         httpOnly: true,
@@ -123,27 +129,26 @@ export const logout = async (req, res) => {
 };
 export const updateProfile = async (req, res) => {
   try {
-    const {fullname, email, phoneNumber, bio, skills} = req.body;
-    const file=req.file;
+    const { fullname, email, phoneNumber, bio, skills } = req.body;
+    const file = req.file;
     let skillsarray;
-    if(skills){
-      skillsarray=skills.split(",");
+    if (skills) {
+      skillsarray = skills.split(",");
     }
-    
-    
+
     const userId = req.id;
     let user = await User.findById(userId);
     if (!user) {
       return res.status(400).json({
         error: "user not found",
-        success: false
+        success: false,
       });
     }
-    if(fullname) user.fullname=fullname;
-    if(email)  user.email=email;
-    if(phoneNumber) user.phoneNumber=phoneNumber;
-    if(bio) user.profile.bio=bio;
-    if(skills)  user.profile.skills=skillsarray;
+    if (fullname) user.fullname = fullname;
+    if (email) user.email = email;
+    if (phoneNumber) user.phoneNumber = phoneNumber;
+    if (bio) user.profile.bio = bio;
+    if (skills) user.profile.skills = skillsarray;
     await user.save();
     user = {
       _id: user._id,
@@ -151,15 +156,25 @@ export const updateProfile = async (req, res) => {
       email: user.email,
       phoneNumber: user.phoneNumber,
       role: user.role,
-      profile: user.profile
+      profile: user.profile,
     };
     return res.status(200).json({
       message: "Profile Updated",
       user,
-      success: true
-    })
+      success: true,
+    });
   } catch (error) {
     console.log(error);
   }
 };
+export const history = async (req, res) => {
+  const user = req.id;
+  console.log(user);
 
+  try {
+    const history = await audit.find({ userId: user });
+    res.json(history);
+  } catch (error) {
+    console.log(error);
+  }
+};

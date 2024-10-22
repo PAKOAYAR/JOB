@@ -8,6 +8,7 @@ import Jobs from './components/jobs'
 import Browse from './components/Browse'
 import Profile from './components/Profile'
 import Jobdescription from './components/Jobdescription'
+import History from './components/History'
 
 
 //import Navbar from './components/ui/shared/Navbar'
@@ -42,6 +43,10 @@ const appRouter=createBrowserRouter([
   {
     path:'/profile',
     element:<Profile/>
+  },
+  {
+    path:'/history',
+    element:<History/>
   },
   
   

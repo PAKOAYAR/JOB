@@ -7,7 +7,7 @@ import {
 //import { Button } from '../button'
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "../button";
-import { LogOut, User2 } from "lucide-react";
+import { History, LogOut, User2 } from "lucide-react";
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
@@ -33,6 +33,7 @@ const Navbar = () => {
           toast.error(error.response.data.message);
       }
   }
+
   return (
       <div className='bg-white'>
           <div className='flex items-center justify-between mx-auto max-w-7xl h-16'>
@@ -60,11 +61,13 @@ const Navbar = () => {
                   </ul>
                   {
                       !user ? (
+                        
                           <div className='flex items-center gap-2'>
                               <Link to="/login"><Button variant="outline">Login</Button></Link>
                               <Link to="/signup"><Button className="bg-[#6A38C2] hover:bg-[#5b30a6]">Signup</Button></Link>
                           </div>
                       ) : (
+                        
                           <Popover>
                               <PopoverTrigger asChild>
                                   <Avatar className="cursor-pointer">
@@ -95,7 +98,15 @@ const Navbar = () => {
                                           <div className='flex w-fit items-center gap-2 cursor-pointer'>
                                               <LogOut />
                                               <Button onClick={logoutHandler} variant="link">Logout</Button>
+                                            
                                           </div>
+                                          <div className='flex w-fit items-center gap-2 cursor-pointer'>
+                                          <History/>
+                                          {/* <Link to='/history' className="font-bold">  History</Link> */}
+                                          <Link to="/history"><Button variant="link">History</Button></Link>
+                                            
+                                          </div>
+                                         
                                       </div>
                                   </div>
                               </PopoverContent>
