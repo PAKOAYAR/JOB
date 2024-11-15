@@ -21,6 +21,17 @@ const Updateprofile = ({open,setopen}) => {
 const changeEventHandler=(e)=>{
     setInput({...input,[e.target.name]:e.target.value});
 }
+const filechangehand=(e)=>{
+    const file=e.target.files?.[0];
+      setInput({...input,file});
+}
+const submitHandler=(e)=>{
+    e.preventDefault();
+    const formData=new formData();
+    formData.append("fullname",input.fullname);
+    console.log(input);
+    
+}
 
 
 return (
@@ -30,7 +41,7 @@ return (
                 <DialogHeader>
                     <DialogTitle>Update Profile</DialogTitle>
                 </DialogHeader>
-                <form>
+                <form onSubmit={submitHandler}>
                     <div className='grid gap-4 py-4'>
                         <div className='grid grid-cols-4 items-center gap-4'>
                             <Label htmlFor="name" className="text-right">Name</Label>
@@ -91,7 +102,7 @@ return (
                                 name="file"
                                 type="file"
                                 accept="application/pdf"
-                               
+                               onChange={filechangehand}
                                 className="col-span-3"
                             />
                         </div>
