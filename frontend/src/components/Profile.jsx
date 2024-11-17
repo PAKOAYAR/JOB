@@ -8,9 +8,11 @@ import { Badge } from "./ui/badge";
 import { Label } from "./ui/label";
 import AppliedJobTable from "./AppliedJobTable";
 import Updateprofile from "./Updateprofile";
-const skill = ["HTML", "CSS", "Javascript", "React", "C++"];
+import { useSelector } from "react-redux";
+//const skill = ["HTML", "CSS", "Javascript", "React", "C++"];
 const Profile = () => {
   const[open,setopen]=useState(false);
+  const {user}=useSelector(store=>store.auth)
   const isresume = true;
   return (
     <div>
@@ -25,10 +27,9 @@ const Profile = () => {
               ></AvatarImage>
             </Avatar>
             <div>
-              <h1 className="font-medium text-xl">Full Name</h1>
+              <h1 className="font-medium text-xl">{user?.fullname}</h1>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Repellat porro id ducimus.
+               {user?.profile?.bio}
               </p>
             </div>
           </div>
@@ -40,21 +41,17 @@ const Profile = () => {
         <div className="my-5">
           <div className="flex items-center gap-3 my-2">
             <Mail />
-            <span>Pankaj@gmail.com</span>
+            <span>{user?.email}</span>
           </div>
           <div className="flex items-center gap-3 my-2">
             <Contact />
-            <span>6355863125</span>
+            <span>{user?.phoneNumber}</span>
           </div>
         </div>
         <div className="my-5">
           <h1>skills</h1>
           <div className="flex items-center gap-1">
-            {skill.length != 0 ? (
-              skill.map((item, index) => <Badge key={index}>{item}</Badge>)
-            ) : (
-              <span>NA</span>
-            )}
+        {  user?.profile?.skills.length !== 0 ? user?.profile?.skills.map((item, index) => <Badge key={index}>{item}</Badge>) : <span>NA</span>}
           </div>
         </div>
         <div className="grid w-full max-w-sm items-center gap-1.5">
@@ -62,10 +59,10 @@ const Profile = () => {
           {isresume ? (
             <a
               target="blank"
-              href="https://youtube.com"
+              href={user?.profile?.resume}
               className="text-blue-500 w-full hover:underline cursor-pointer"
             >
-              Pankaj
+              {user?.profile?.resumeOriginalName }
             </a>
           ) : (
             <span>NA</span>
