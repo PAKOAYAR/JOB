@@ -4,9 +4,11 @@ import HeroSection from './HeroSection'
 import CategoryCarousel from './CategoryCarousel'
 import LatestJobs from './LatestJobs'
 import Footer from './ui/shared/Footer'
+import useGetAllJob from '@/hooks/useGetAllJob'
 
 
 const Home = () => {
+  useGetAllJob();
   return (
     <div>
         <Navbar></Navbar>
@@ -14,7 +16,8 @@ const Home = () => {
       <CategoryCarousel/>
     
         <LatestJobs/>
-        <Footer/>  
+        <Footer/> 
+
     </div>
   )
 }

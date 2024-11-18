@@ -5,7 +5,7 @@ import { Avatar, AvatarImage } from "./ui/avatar";
 import { Badge } from "./ui/badge";
 import { useNavigate } from "react-router-dom";
 
-const Job = () => {
+const Job = (job) => {
  const navigate=useNavigate();
  const jobId="hjsdncnxn"
   return (
@@ -47,7 +47,7 @@ const Job = () => {
         </Badge>
       </div>
       <div className="flex items-center gap-4 mt-4">
-        <Button onClick={()=>navigate(`/description/${jobId}`)} variant='outline'>Detail</Button>
+        <Button onClick={()=>navigate(`/description/${job?._id}`)} variant='outline'>Detail</Button>
         <Button className='bg-[#7209b7]'>Save For Later</Button>
       </div>
     </div>
