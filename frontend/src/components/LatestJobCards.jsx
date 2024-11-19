@@ -1,4 +1,3 @@
-import React from "react";
 import { Badge } from "./ui/badge";
 import { useSelector } from "react-redux";
 
@@ -7,14 +6,14 @@ const LatestJobCards = () => {
  
   return (
     <>
-      {alljobs[0]?.map((item, index) => {
+      {alljobs.map((item, index) => {
         return (
           <div
             key={index}
             className="p-5 rounded-md shadow-xl bg-white border border-gray-100 cursor-pointer"
           >
             <div>
-              <h1 className="font-medium text-lg">{item?.company.name}</h1>
+              <h1 className="font-medium text-lg">{item?.company?.name}</h1>
               <p className="text-sm text-gray-500">{item?.location}</p>
             </div>
             <div>
