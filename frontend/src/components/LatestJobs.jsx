@@ -3,7 +3,7 @@ import LatestJobCards from "./LatestJobCards";
 import { useSelector } from "react-redux";
 
 const LatestJobs = () => {
-  const { alljobs = [] } = useSelector((store) => store.job); // Default to an empty array
+  const { alljobs = [] } = useSelector((store) => store.job); 
   // console.log(alljobs);
 
   return (
@@ -15,7 +15,7 @@ const LatestJobs = () => {
         {alljobs.length === 0 ? (
           <span>No Job Available</span>
         ) : (
-          <LatestJobCards /> // Pass job directly
+          <LatestJobCards />
         )}
       </div>
     </div>
